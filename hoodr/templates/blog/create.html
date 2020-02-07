@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+  <h1>{% block title %}Neuer Mangel{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-    <input type="submit" value="Save">
+    <label for="defect">Mangel</label>
+    <input name="defect" id="defect" value="{{ request.form['defect'] }}" required>
+    <label for="details">Details</label>
+    <textarea name="details" id="details">{{ request.form['details'] }}</textarea>
+    <label for="category">Kategorie</label>
+    <input name="category" id="category" value="{{ request.form['category'] }}">
+    <label for="resolution">Status</label>
+    <textarea name="resolution" id="resolution">{{ request.form['resolution'] }}</textarea>
+    <input type="submit" value="Speichern">
   </form>
 {% endblock %}
