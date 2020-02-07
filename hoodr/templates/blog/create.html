@@ -6,14 +6,22 @@
 
 {% block content %}
   <form method="post">
-    <label for="defect">Mangel</label>
-    <input name="defect" id="defect" value="{{ request.form['defect'] }}" required>
-    <label for="details">Details</label>
-    <textarea name="details" id="details">{{ request.form['details'] }}</textarea>
-    <label for="category">Kategorie</label>
-    <input name="category" id="category" value="{{ request.form['category'] }}">
-    <label for="resolution">Status</label>
-    <textarea name="resolution" id="resolution">{{ request.form['resolution'] }}</textarea>
-    <input type="submit" value="Speichern">
+    <div class="form-group">
+      <label for="defect">Mangel</label><br>
+      <input name="defect" id="defect" size="50" value="{{ request.form['defect'] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="details">Details</label><br>
+      <textarea name="details" id="details" cols=50 rows="10">{{ request.form['details'] }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="category">Kategorie</label><br>
+      <input name="category" id="category" size="50" value="{{ request.form['category'] }}">
+    </div>
+    <div class="form-group">
+      <label for="resolution">Status</label><br>
+      <textarea name="resolution" id="resolution" cols=50 rows="2">{{ request.form['resolution'] }}</textarea>
+    </div>
+    <input type="submit" class="btn btn-primary btn-sm" value="Speichern">
   </form>
 {% endblock %}

@@ -1,19 +1,19 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - Hoodr</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 <nav>
-  <h1>Hoodr</h1>
-  <ul>
+  <h1>Hood - Mängeltool</h1>
+  <ul class="nav justify-content-end">
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li class="nav-item"><a class="nav-link disabled" href="#">{{ g.user['username'] }}</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.register') }}">Register</a></li>
+      <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.login') }}">Log In</a></li>
     {% endif %}
   </ul>
 </nav>
-<section class="content">
+<div class="container-fluid">  
   <header>
     {% block header %}{% endblock %}
   </header>
@@ -21,4 +21,4 @@
     <div class="flash">{{ message }}</div>
   {% endfor %}
   {% block content %}{% endblock %}
-</section>
+</div>

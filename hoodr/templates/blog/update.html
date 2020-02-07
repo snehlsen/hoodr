@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Mangel ändern "{{ post['title'] }}"{% endblock %}</h1>
+  <h3>{% block title %}Mangel ändern "{{ post['defect'] }}"{% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
@@ -16,10 +16,10 @@
       value="{{ request.form['category'] or post['category'] }}">
     <label for="resolution">Status</label>
     <textarea name="resolution" id="resolution">{{ request.form['resolution'] or post['resolution'] }}</textarea>
-    <input type="submit" value="Speichern">
+    <input type="submit" class="btn btn-primary btn-sm" value="Speichern">
   </form>
   <hr>
   <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Löschen" onclick="return confirm('Eintrag löschen?');">
+    <input type="submit" class="btn btn-danger btn-sm" value="Löschen" onclick="return confirm('Eintrag löschen?');">
   </form>
 {% endblock %}

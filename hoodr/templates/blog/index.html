@@ -1,25 +1,35 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Erfasste Mängel{% endblock %}</h1>
+  <h2>{% block title %}Erfasste Mängel{% endblock %}</h2>
   {% if g.user %}
-    <a class="action" href="{{ url_for('blog.create') }}">Neuen Mangel erfassen</a>
+    <a class="badge badge-success" href="{{ url_for('blog.create') }}">Neuen Mangel erfassen</a>
   {% endif %}
+  <br><br>
 {% endblock %}
 
 {% block content %}
-<table>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Haus</th>
+      <th>Mangel</th>
+      <th>Details</th>
+      <th>Kategorie</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
   {% for post in posts %}
     <tr>
       <td>{{ post['username'] }}</td>
       <td>{{ post['defect'] }}</td>
       <td>{{ post['details'] }}</td>
-      <td>{{ post['category'] }}</td>
+      <td><span class="badge badge-pill badge-primary">{{ post['category'] }}</span></td>
       <td>{{ post['resolution'] }}</td>
-      <td>{{ post['created'].strftime('%Y-%m-%d') }}</td>
       <td>
       {% if g.user['id'] == post['author_id'] %}
-        <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Ändern</a>
+        <a class="badge badge-secondary" href="{{ url_for('blog.update', id=post['id']) }}">Ändern</a>
       {% endif %}
       </td>
     </tr>
