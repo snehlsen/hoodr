@@ -3,7 +3,7 @@
 {% block header %}
   <h2>{% block title %}Erfasste Mängel{% endblock %}</h2>
   {% if g.user %}
-    <a class="badge badge-success" href="{{ url_for('blog.create') }}">Neuen Mangel erfassen</a>
+    <a class="badge badge-success" href="{{ url_for('defect.create') }}">Neuen Mangel erfassen</a>
   {% endif %}
   <br><br>
 {% endblock %}
@@ -29,7 +29,7 @@
       <td>{{ post['resolution'] }}</td>
       <td>
       {% if g.user['id'] == post['author_id'] %}
-        <a class="badge badge-secondary" href="{{ url_for('blog.update', id=post['id']) }}">Ändern</a>
+        <a class="badge badge-secondary" href="{{ url_for('defect.update', id=post['id']) }}">Ändern</a>
       {% endif %}
       </td>
     </tr>

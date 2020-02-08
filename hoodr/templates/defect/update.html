@@ -27,7 +27,7 @@
     <input type="submit" class="btn btn-primary btn-sm" value="Speichern">
   </form>
   <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('defect.delete', id=post['id']) }}" method="post">
     <input type="submit" class="btn btn-danger btn-sm" value="Löschen" onclick="return confirm('Eintrag löschen?');">
   </form>
 {% endblock %}

@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from hoodr.auth import login_required
 from hoodr.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('defect', __name__)
 
 
 @bp.route('/')
@@ -18,7 +18,7 @@ def index():
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
-    return render_template('blog/index.html', posts=posts)
+    return render_template('defect/index.html', posts=posts)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -44,9 +44,9 @@ def create():
                 (defect, details, category, resolution, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('defect.index'))
 
-    return render_template('blog/create.html')
+    return render_template('defect/create.html')
 
 
 def get_post(id, check_author=True):
@@ -91,9 +91,9 @@ def update(id):
                 (defect, details, category, resolution, id)
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('defect.index'))
 
-    return render_template('blog/update.html', post=post)
+    return render_template('defect/update.html', post=post)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
@@ -103,4 +103,4 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('defect.index'))
