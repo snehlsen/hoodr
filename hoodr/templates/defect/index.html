@@ -6,6 +6,22 @@
     <a class="badge badge-success" href="{{ url_for('defect.create') }}">Neuen Mangel erfassen</a>
   {% endif %}
   <br><br>
+  <form method="post">
+    <div class="form-group">
+      <label for="username">Haus</label>
+      <input name="username" id="username">
+    </div>
+    <div class="form-group">
+      <label for="defect">Mangel</label>
+      <input name="defect" id="defect">
+    </div>
+    <div class="form-group">
+      <label for="category">Kategorie</label>
+      <input name="category" id="category">
+    </div>
+    <input type="submit" value="Filtern">
+  </form>
+  <br>
 {% endblock %}
 
 {% block content %}

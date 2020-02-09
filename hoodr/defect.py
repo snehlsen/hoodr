@@ -9,15 +9,31 @@ from hoodr.db import get_db
 bp = Blueprint('defect', __name__)
 
 
-@bp.route('/')
+@bp.route('/', methods=('GET', 'POST'))
 @login_required
 def index():
+    qfilter = []
+    if request.method == 'POST':
+        username = request.form['username']
+        defect = request.form['defect']
+        category = request.form['category']
+        if username:
+            qfilter.append("username like '%{}%'".format(username))
+        if defect:
+            qfilter.append("defect like '%{}%'".format(defect))
+        if category:
+            qfilter.append("category like '%{}%'".format(category))
+    
+    sqltext = '''SELECT p.id, defect, details, category, resolution, created, author_id, username
+                 FROM post p JOIN user u ON p.author_id = u.id
+              '''
+    if len(qfilter):
+        sqltext = sqltext + ' WHERE ' + ' AND '.join(qfilter)
+    sqltext = sqltext + ' ORDER BY created DESC'
+    print(sqltext)
+
     db = get_db()
-    posts = db.execute(
-        'SELECT p.id, defect, details, category, resolution, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
-    ).fetchall()
+    posts = db.execute(sqltext).fetchall()
     return render_template('defect/index.html', posts=posts)
 
 
