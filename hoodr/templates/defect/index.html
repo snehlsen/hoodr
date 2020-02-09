@@ -7,17 +7,16 @@
   {% endif %}
   <br><br>
   <form method="post">
-    <div class="form-group">
-      <label for="username">Haus</label>
-      <input name="username" id="username">
-    </div>
-    <div class="form-group">
-      <label for="defect">Mangel</label>
-      <input name="defect" id="defect">
-    </div>
-    <div class="form-group">
-      <label for="category">Kategorie</label>
-      <input name="category" id="category">
+    <div class="row">
+      <div class="col">
+        <input class="form-control" placeholder="Haus" name="username" id="username">
+      </div>
+      <div class="col">
+        <input class="form-control" placeholder="Mangel" name="defect" id="defect">
+      </div>
+      <div class="col">
+        <input class="form-control" placeholder="Kategorie" name="category" id="category">
+      </div>
     </div>
     <input type="submit" value="Filtern">
   </form>
