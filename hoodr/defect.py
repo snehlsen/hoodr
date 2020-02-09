@@ -12,6 +12,7 @@ bp = Blueprint('defect', __name__)
 @bp.route('/', methods=('GET', 'POST'))
 @login_required
 def index():
+    #TODO: avoid sql injection
     qfilter = []
     if request.method == 'POST':
         username = request.form['username']
@@ -30,7 +31,7 @@ def index():
     if len(qfilter):
         sqltext = sqltext + ' WHERE ' + ' AND '.join(qfilter)
     sqltext = sqltext + ' ORDER BY created DESC'
-    print(sqltext)
+    #print(sqltext)
 
     db = get_db()
     posts = db.execute(sqltext).fetchall()
