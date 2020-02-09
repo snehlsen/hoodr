@@ -12,18 +12,21 @@ bp = Blueprint('defect', __name__)
 @bp.route('/', methods=('GET', 'POST'))
 @login_required
 def index():
-    #TODO: avoid sql injection
     qfilter = []
+    params = []
     if request.method == 'POST':
         username = request.form['username']
         defect = request.form['defect']
         category = request.form['category']
         if username:
-            qfilter.append("username like '%{}%'".format(username))
+            qfilter.append("username LIKE ?")
+            params.append('%'+username+'%')
         if defect:
-            qfilter.append("defect like '%{}%'".format(defect))
+            qfilter.append("defect LIKE ?")
+            params.append('%'+defect+'%')
         if category:
-            qfilter.append("category like '%{}%'".format(category))
+            qfilter.append("category LIKE ?")
+            params.append('%'+category+'%')
     
     sqltext = '''SELECT p.id, defect, details, category, resolution, created, author_id, username
                  FROM post p JOIN user u ON p.author_id = u.id
@@ -31,10 +34,9 @@ def index():
     if len(qfilter):
         sqltext = sqltext + ' WHERE ' + ' AND '.join(qfilter)
     sqltext = sqltext + ' ORDER BY created DESC'
-    #print(sqltext)
 
     db = get_db()
-    posts = db.execute(sqltext).fetchall()
+    posts = db.execute(sqltext, params).fetchall()
     return render_template('defect/index.html', posts=posts)
 
 
