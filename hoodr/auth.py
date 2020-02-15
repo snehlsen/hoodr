@@ -23,13 +23,14 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
-        elif valid_user_names:
-            if username not in current_app.config['VALID_USER_NAMES']:
-                error = 'Invalid username.'
         elif db.execute(
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
+
+        if valid_user_names:
+            if username not in valid_user_names:
+                error = 'Invalid username.'
 
         if error is None:
             db.execute(
